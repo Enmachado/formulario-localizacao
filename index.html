@@ -1,287 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Acesso ao formulário | Epson</title>
+    <title>Acesso ao Formulário | Epson</title>
 
-<style>
-:root{
-    --epson:#10218b;
-    --bg:#f4f7fc;
-    --card:#ffffffee;
-    --text:#0e1a4a;
-    --muted:#56617f;
-    --border:#d5ddee;
-    --accent:#10218b;
-    --accent-hover:#0a166a;
-    --on-accent:#fff;
-    --ok:#087443;
-    --bad:#b42318;
-    --panel:#eef3fb;
-}
+    <style>
+        :root {
+            --epson: #10218b;
+            --epson-hover: #0a166a;
+            --text: #0e1a4a;
+            --muted: #56617f;
+            --card: rgba(255, 255, 255, 0.95);
+            --border: #d5ddee;
+            --ok: #087443;
+            --bad: #b42318;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body{
-    min-height:100vh;
-    font-family:"Segoe UI",Arial,sans-serif;
-    background:
-        linear-gradient(
-            rgba(255,255,255,.85),
-            rgba(255,255,255,.85)
-        ),
-        url("./Epson_One_zoom2.png");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    color:var(--text);
-}
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-main{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
+            font-family: Arial, Helvetica, sans-serif;
 
-.card{
-    width:100%;
-    max-width:520px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-top:6px solid var(--epson);
-    border-radius:10px;
-    padding:32px;
-    box-shadow:0 12px 40px rgba(0,0,0,.15);
-}
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.85),
+                    rgba(255,255,255,0.85)
+                ),
+                url("./Epson_One_zoom2.png");
 
-.logo{
-    display:block;
-    width:220px;
-    max-width:100%;
-    height:auto;
-    margin:0 auto 25px;
-}
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-h1{
-    font-size:clamp(2rem,5vw,3rem);
-    color:var(--epson);
-    margin-bottom:15px;
-    line-height:1.2;
-    text-align:center;
-}
+            padding: 20px;
+        }
 
-.lead{
-    color:var(--muted);
-    line-height:1.6;
-    margin-bottom:25px;
-    font-size:1.1rem;
-    text-align:center;
-}
+        .card {
+            width: 100%;
+            max-width: 550px;
 
-.btn{
-    display:block;
-    width:100%;
-    text-align:center;
-    text-decoration:none;
-    padding:16px;
-    border:none;
-    border-radius:6px;
-    background:var(--accent);
-    color:white;
-    font-size:18px;
-    font-weight:700;
-    cursor:pointer;
-}
+            background: var(--card);
 
-.btn:hover{
-    background:var(--accent-hover);
-}
+            border: 1px solid var(--border);
+            border-top: 6px solid var(--epson);
+            border-radius: 10px;
 
-.status{
-    display:none;
-    margin-top:20px;
-    padding:20px;
-    border-radius:6px;
-    background:var(--panel);
-}
+            padding: 35px;
 
-.status.show{
-    display:block;
-}
+            box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
+        }
 
-.status.ok{
-    border-left:5px solid var(--ok);
-}
+        .logo {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            margin: 0 auto 30px auto;
+        }
 
-.status.bad{
-    border-left:5px solid var(--bad);
-}
+        h1 {
+            text-align: center;
+            color: var(--epson);
 
-.title{
-    font-size:1.6rem;
-    font-weight:700;
-    margin-bottom:10px;
-}
+            font-size: clamp(2rem, 4vw, 3rem);
 
-.distance{
-    font-size:3rem;
-    font-weight:700;
-    margin-bottom:10px;
-    color:var(--epson);
-}
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
 
-.footer{
-    margin-top:25px;
-    padding-top:20px;
-    border-top:1px solid var(--border);
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.6;
-    text-align:center;
-}
+        .lead {
+            text-align: center;
 
-@media(max-width:600px){
+            color: var(--muted);
 
-    .card{
-        padding:24px;
-    }
+            font-size: 18px;
+            line-height: 1.6;
 
-    .logo{
-        width:180px;
-    }
+            margin-bottom: 30px;
+        }
 
-    .distance{
-        font-size:2rem;
-    }
-}
-</style>
+        .btn {
+            width: 100%;
+
+            background: var(--epson);
+            color: #fff;
+
+            border: none;
+            border-radius: 6px;
+
+            padding: 16px;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .btn:hover {
+            background: var(--epson-hover);
+        }
+
+        .status {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 20px;
+
+            border-radius: 6px;
+
+            background: #eef3fb;
+        }
+
+        .status.show {
+            display: block;
+        }
+
+        .status.ok {
+            border-left: 5px solid var(--ok);
+        }
+
+        .status.bad {
+            border-left: 5px solid var(--bad);
+        }
+
+        .title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .distance {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: var(--epson);
+        }
+
+        .footer {
+            margin-top: 25px;
+            padding-top: 20px;
+
+            border-top: 1px solid var(--border);
+
+            text-align: center;
+            color: var(--muted);
+
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .link-btn {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+            text-decoration: none;
+
+            background: var(--epson);
+            color: white;
+
+            padding: 15px;
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
-<main>
+    <div class="card">
 
-<section class="card">
+        ./EPSON_LOGO_2023_RGB.png
 
-./EPSON_LOGO_2023_RGB.png
+        <h1>Acesso ao formulário</h1>
 
-<h1>Acesso ao formulário</h1>
+        <p class="lead">
+            O formulário só pode ser acessado quando o aparelho estiver
+            a até <strong>1 km</strong> do local autorizado.
+        </p>
 
-<p class="lead">
-O formulário só pode ser acessado quando o aparelho estiver
-a até <strong>1 km</strong> do local autorizado.
-</p>
+        <button id="check" class="btn">
+            Verificar minha localização
+        </button>
 
-<button id="check" class="btn">
-Verificar minha localização
-</button>
+        <div id="status" class="status"></div>
 
-<div id="status" class="status"></div>
+        <div class="footer">
+            Local autorizado: Av. Tucunaré, 720 – Tamboré, Barueri/SP.
+            <br><br>
+            O navegador solicitará permissão para utilizar sua localização.
+        </div>
 
-<div class="footer">
-Local autorizado: Av. Tucunaré, 720 – Tamboré, Barueri/SP.<br>
-O navegador solicitará permissão para usar sua localização.
-</div>
+    </div>
 
-</section>
+    <script>
 
-</main>
+        const TARGET = {
+            lat: -23.4947049,
+            lon: -46.8358179
+        };
 
-<script>
+        const RADIUS = 1000;
 
-const TARGET = {
-    lat: -23.4947049,
-    lon: -46.8358179
-};
+        const FORM_URL =
+            "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=RaU9Qh6__km0Hi5-MbQLE8soOvqjAoVBnO9JLW0LHghUMVZTTFlFUjBWRktHMlAyOVcxRE1NTFNCQi4u";
 
-const RADIUS = 1000;
+        const btn = document.getElementById("check");
+        const statusBox = document.getElementById("status");
 
-const FORM_URL =
-"https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=RaU9Qh6__km0Hi5-MbQLE8soOvqjAoVBnO9JLW0LHghUMVZTTFlFUjBWRktHMlAyOVcxRE1NTFNCQi4u";
+        function distanceMeters(lat1, lon1, lat2, lon2) {
 
-const btn = document.getElementById("check");
-const statusBox = document.getElementById("status");
+            const R = 6371000;
 
-function distanceMeters(lat1, lon1, lat2, lon2){
+            const toRad = value => value * Math.PI / 180;
 
-    const R = 6371000;
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
 
-    const toRad = n => n * Math.PI / 180;
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) *
+                Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
 
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-
-    const a =
-        Math.sin(dLat / 2) ** 2 +
-        Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) ** 2;
-
-    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-function showStatus(html, type){
-    statusBox.className = "status show " + type;
-    statusBox.innerHTML = html;
-}
-
-function retry(){
-    btn.disabled = false;
-    btn.textContent = "Tentar novamente";
-}
-
-btn.addEventListener("click", () => {
-
-    if(!navigator.geolocation){
-
-        showStatus(
-            `<div class="title">Geolocalização não suportada.</div>
-             <p>Utilize um navegador mais recente.</p>`,
-            "bad"
-        );
-
-        return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = "Obtendo localização...";
-
-    navigator.geolocation.getCurrentPosition(
-
-        position => {
-
-            const distance = distanceMeters(
-                position.coords.latitude,
-                position.coords.longitude,
-                TARGET.lat,
-                TARGET.lon
+            return R * 2 * Math.atan2(
+                Math.sqrt(a),
+                Math.sqrt(1 - a)
             );
+        }
 
-            if(distance <= RADIUS){
+        function showStatus(html, type) {
+
+            statusBox.className = "status show " + type;
+            statusBox.innerHTML = html;
+        }
+
+        function retry() {
+
+            btn.disabled = false;
+            btn.textContent = "Tentar novamente";
+        }
+
+        btn.addEventListener("click", () => {
+
+            if (!navigator.geolocation) {
 
                 showStatus(
-                `
-                <div class="title">✅ Localização confirmada</div>
+                    "<div class='title'>Geolocalização não suportada.</div>",
+                    "bad"
+                );
 
-                <div class="distance">
-                    ${Math.round(distance)} m
-                </div>
+                return;
+            }
 
-                <p>
-                    Você está dentro da área permitida.
-                </p>
+            btn.disabled = true;
+            btn.textContent = "Obtendo localização...";
 
-                <br>
+            navigator.geolocation.getCurrentPosition(
 
-                <a class="btn"
-                   href="${FORM_URL}"
-                   target="_blank"
+                position => {
+
+                    const distance = distanceMeters(
+                        position.coords.latitude,
+                        position.coords.longitude,
+                        TARGET.lat,
+                        TARGET.lon
+                    );
+
+                    if (distance <= RADIUS) {
+
+                        showStatus(
+                            `
+                            <div class="title">
+                                ✅ Localização confirmada
+                            </div>
+
+                            <div class="distance">
+                                ${Math.round(distance)} m
+                            </div>
+
+                            <p>
+                                Você está dentro da área permitida.
+                            </p>
+
+                            <a
+                                class="link-btn"
+                                href="${FORM_URL}"
+                                target="_blank">
+                                Acessar formulário
+                            </a>
+                            `,
+                            "ok"
+                        );
+
+                        btn.style.display = "none";
+
+                    } else {
+
+                        showStatus(
+                            `
+                            <div class="title">
+                                ❌ Fora da área permitida
+                            </div>
+
+                            <div class="distance">
+                                ${Math.round(distance)} m
+                            </div>
+
+                            <p>
+                                É necessário estar a até
+                                1.000 metros do local autorizado.
+                            </p>
+                            `,
+                            "bad"
+                        );
+
+                        retry();
+                    }
+                },
+
+                error => {
+
+                    let msg = "Não foi possível obter sua localização.";
+
+                    if (error.code === 1) {
+                        msg = "Permissão de localização negada.";
+                    }
+
+                    if (error.code === 2) {
+                        msg = "Localização indisponível.";
+                    }
+
+                    if (error.code === 3) {
+                        msg = "Tempo excedido ao obter localização.";
+                    }
+
+                    showStatus(
+                        `<div class="title">${msg}</div>`,
+                        "bad"
+                    );
+
+                    retry();
+                },
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                    maximumAge: 0
+                }
+            );
+        });
+
+    </script>
+
+</body>
+</html>
                 
