@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +9,6 @@
 <style>
 :root{
     --epson:#10218b;
-    --sky:#29a3e8;
     --bg:#f4f7fc;
     --card:#ffffffee;
     --text:#0e1a4a;
@@ -34,11 +32,14 @@ body{
     min-height:100vh;
     font-family:"Segoe UI",Arial,sans-serif;
     background:
-        linear-gradient(rgba(255,255,255,.85),
-        rgba(255,255,255,.85)),
-        url("Epson_One_zoom2.png");
+        linear-gradient(
+            rgba(255,255,255,.85),
+            rgba(255,255,255,.85)
+        ),
+        url("./Epson_One_zoom2.png");
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
     color:var(--text);
 }
 
@@ -62,16 +63,19 @@ main{
 }
 
 .logo{
-    max-width:180px;
-    width:100%;
+    display:block;
+    width:220px;
+    max-width:100%;
     height:auto;
-    margin-bottom:25px;
+    margin:0 auto 25px;
 }
 
 h1{
     font-size:clamp(2rem,5vw,3rem);
-    margin-bottom:15px;
     color:var(--epson);
+    margin-bottom:15px;
+    line-height:1.2;
+    text-align:center;
 }
 
 .lead{
@@ -79,6 +83,7 @@ h1{
     line-height:1.6;
     margin-bottom:25px;
     font-size:1.1rem;
+    text-align:center;
 }
 
 .btn{
@@ -94,7 +99,6 @@ h1{
     font-size:18px;
     font-weight:700;
     cursor:pointer;
-    transition:.2s;
 }
 
 .btn:hover{
@@ -127,24 +131,11 @@ h1{
     margin-bottom:10px;
 }
 
-.status.ok .title{
-    color:var(--ok);
-}
-
-.status.bad .title{
-    color:var(--bad);
-}
-
 .distance{
     font-size:3rem;
     font-weight:700;
     margin-bottom:10px;
     color:var(--epson);
-}
-
-.status p{
-    color:var(--muted);
-    line-height:1.5;
 }
 
 .footer{
@@ -154,6 +145,7 @@ h1{
     color:var(--muted);
     font-size:14px;
     line-height:1.6;
+    text-align:center;
 }
 
 @media(max-width:600px){
@@ -162,16 +154,15 @@ h1{
         padding:24px;
     }
 
-    h1{
-        font-size:2.2rem;
+    .logo{
+        width:180px;
     }
 
     .distance{
-        font-size:2.2rem;
+        font-size:2rem;
     }
 }
 </style>
-
 </head>
 
 <body>
@@ -180,12 +171,12 @@ h1{
 
 <section class="card">
 
-<img
-class="logo"
-src="EPSON_LOGO_2023_RGB.png"
-alt="Epson">
+./EPSON_LOGO_2023_RGB.png
 
-<h1>Acesso O formulário só pode ser acessado quando o aparelho estiver
+<h1>Acesso ao formulário</h1>
+
+<p class="lead">
+O formulário só pode ser acessado quando o aparelho estiver
 a até <strong>1 km</strong> do local autorizado.
 </p>
 
@@ -229,13 +220,12 @@ function distanceMeters(lat1, lon1, lat2, lon2){
     const dLon = toRad(lon2 - lon1);
 
     const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLat / 2) ** 2 +
         Math.cos(toRad(lat1)) *
         Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+        Math.sin(dLon / 2) ** 2;
 
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 function showStatus(html, type){
@@ -253,9 +243,10 @@ btn.addEventListener("click", () => {
     if(!navigator.geolocation){
 
         showStatus(
-        `<div class="title">Geolocalização não suportada.</div>
-        <p>Utilize um navegador mais recente.</p>`,
-        "bad");
+            `<div class="title">Geolocalização não suportada.</div>
+             <p>Utilize um navegador mais recente.</p>`,
+            "bad"
+        );
 
         return;
     }
@@ -292,74 +283,5 @@ btn.addEventListener("click", () => {
 
                 <a class="btn"
                    href="${FORM_URL}"
-                   target="_blank">
-                    Acessar formulário
-                </a>
-                `,
-                "ok"
-                );
-
-                btn.style.display = "none";
-
-            }else{
-
-                showStatus(
-                `
-                <div class="title">❌ Fora da área permitida</div>
-
-                <div class="distance">
-                    ${Math.round(distance)} m
-                </div>
-
-                <p>
-                    É necessário estar a até
-                    1.000 metros do local autorizado
-                    para acessar o formulário.
-                </p>
-                `,
-                "bad"
-                );
-
-                retry();
-            }
-        },
-
-        error => {
-
-            let message =
-            "Não foi possível obter sua localização.";
-
-            if(error.code === 1){
-                message =
-                "Permissão de localização negada.";
-            }
-
-            if(error.code === 2){
-                message =
-                "Localização indisponível.";
-            }
-
-            if(error.code === 3){
-                message =
-                "Tempo de solicitação excedido.";
-            }
-
-            showStatus(
-            `<div class="title">${message}</div>`,
-            "bad"
-            );
-
-            retry();
-        },
-
-        {
-            enableHighAccuracy:true,
-            timeout:15000,
-            maximumAge:0
-        }
-    );
-});
-</script>
-
-</body>
-</html>
+                   target="_blank"
+                
