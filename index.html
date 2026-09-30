@@ -1,376 +1,338 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Acesso ao Formulário | Epson</title>
 
-    <title>Acesso ao Formulário | Epson</title>
+<style>
+:root {
+  --epson: #10218b;
+  --sky: #29a3e8;
+  --bg-img: url("./Epson_One_zoom2.png");
+  --bg: #f4f7fc;
+  --card: rgba(255, 255, 255, 0.92);
+  --text: #0e1a4a;
+  --title: #10218b;
+  --muted: #56617f;
+  --border: #d5ddee;
+  --btn: #10218b;
+  --btn-hover: #0a166a;
+  --btn-text: #ffffff;
+  --panel: #eef3fb;
+  --ok: #087443;
+  --bad: #b42318;
+  --logo-filter: none;
+}
 
-    <style>
-        :root {
-            --epson: #10218b;
-            --epson-hover: #0a166a;
-            --text: #0e1a4a;
-            --muted: #56617f;
-            --card: rgba(255, 255, 255, 0.95);
-            --border: #d5ddee;
-            --ok: #087443;
-            --bad: #b42318;
-        }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-img: url("./Epson_One_zoom4.png");
+    --bg: #000a4d;
+    --card: rgba(10, 18, 87, 0.88);
+    --text: #f2f5ff;
+    --title: #ffffff;
+    --muted: #b4bfe6;
+    --border: #2c3a8f;
+    --btn: #29a3e8;
+    --btn-hover: #4fb6f0;
+    --btn-text: #001040;
+    --panel: #0d1a72;
+    --ok: #5ee0a0;
+    --bad: #ff9a90;
+    --logo-filter: brightness(0) invert(1);
+  }
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
 
-            font-family: Arial, Helvetica, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--text);
 
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.85),
-                    rgba(255,255,255,0.85)
-                ),
-                url("./Epson_One_zoom2.png");
+  background-color: var(--bg);
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+.card {
+  width: 100%;
+  max-width: 520px;
 
-            padding: 20px;
-        }
+  background: var(--card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 
-        .card {
-            width: 100%;
-            max-width: 550px;
+  border: 1px solid var(--border);
+  border-top: 6px solid var(--epson);
+  border-radius: 8px;
 
-            background: var(--card);
+  padding: 32px 36px 28px;
+  box-shadow: 0 24px 60px rgba(0, 16, 64, 0.25);
+}
 
-            border: 1px solid var(--border);
-            border-top: 6px solid var(--epson);
-            border-radius: 10px;
+/* O PNG tem margem transparente; a margem negativa compensa */
+.logo {
+  display: block;
+  width: 230px;
+  max-width: 70%;
+  height: auto;
+  margin: -12px auto 10px;
+  filter: var(--logo-filter);
+}
 
-            padding: 35px;
+h1 {
+  text-align: center;
+  color: var(--title);
+  font-size: clamp(1.9rem, 5vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
 
-            box-shadow: 0 10px 40px rgba(0, 0, 0, .15);
-        }
+.lead {
+  text-align: center;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
 
-        .logo {
-            display: block;
-            width: 220px;
-            max-width: 100%;
-            margin: 0 auto 30px auto;
-        }
+.lead strong {
+  color: var(--text);
+}
 
-        h1 {
-            text-align: center;
-            color: var(--epson);
+.btn,
+.link-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
 
-            font-size: clamp(2rem, 4vw, 3rem);
+  background: var(--btn);
+  color: var(--btn-text);
 
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
+  font: inherit;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
 
-        .lead {
-            text-align: center;
+  cursor: pointer;
+  transition: background .2s;
+}
 
-            color: var(--muted);
+.btn:hover,
+.link-btn:hover {
+  background: var(--btn-hover);
+}
 
-            font-size: 18px;
-            line-height: 1.6;
+.btn:disabled {
+  opacity: .6;
+  cursor: wait;
+}
 
-            margin-bottom: 30px;
-        }
+.btn:focus-visible,
+.link-btn:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
 
-        .btn {
-            width: 100%;
+.status {
+  display: none;
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: 6px;
+  background: var(--panel);
+  border-left: 5px solid var(--muted);
+}
 
-            background: var(--epson);
-            color: #fff;
+.status.show { display: block; }
+.status.ok  { border-left-color: var(--ok); }
+.status.bad { border-left-color: var(--bad); }
 
-            border: none;
-            border-radius: 6px;
+.title {
+  font-weight: bold;
+}
 
-            padding: 16px;
+.status.ok .title  { color: var(--ok); }
+.status.bad .title { color: var(--bad); }
 
-            font-size: 18px;
-            font-weight: bold;
+.distance {
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: -0.02em;
+  margin: 6px 0;
+}
 
-            cursor: pointer;
+.status p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
 
-            transition: .2s;
-        }
+.status p:last-child { margin-bottom: 0; }
 
-        .btn:hover {
-            background: var(--epson-hover);
-        }
+.footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
 
-        .status {
-            display: none;
+@media (max-width: 600px) {
+  body { background-attachment: scroll; background-position: 70% center; }
+  .card { padding: 26px 22px 22px; }
+}
 
-            margin-top: 20px;
-
-            padding: 20px;
-
-            border-radius: 6px;
-
-            background: #eef3fb;
-        }
-
-        .status.show {
-            display: block;
-        }
-
-        .status.ok {
-            border-left: 5px solid var(--ok);
-        }
-
-        .status.bad {
-            border-left: 5px solid var(--bad);
-        }
-
-        .title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .distance {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 10px 0;
-            color: var(--epson);
-        }
-
-        .footer {
-            margin-top: 25px;
-            padding-top: 20px;
-
-            border-top: 1px solid var(--border);
-
-            text-align: center;
-            color: var(--muted);
-
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        .link-btn {
-            display: block;
-
-            width: 100%;
-
-            text-align: center;
-            text-decoration: none;
-
-            background: var(--epson);
-            color: white;
-
-            padding: 15px;
-            border-radius: 6px;
-
-            font-weight: bold;
-
-            margin-top: 15px;
-        }
-    </style>
+@media (prefers-reduced-motion: reduce) {
+  .btn, .link-btn { transition: none; }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="card">
+<div class="card">
 
-        ./EPSON_LOGO_2023_RGB.png
+  <img class="logo" src="./EPSON_LOGO_2023_RGB.png" alt="Epson">
 
-        <h1>Acesso ao formulário</h1>
+  <h1>Acesso ao formulário</h1>
 
-        <p class="lead">
-            O formulário só pode ser acessado quando o aparelho estiver
-            a até <strong>1 km</strong> do local autorizado.
-        </p>
+  <p class="lead">
+    O formulário só pode ser acessado quando o aparelho estiver
+    a até <strong>1 km</strong> do local autorizado.
+  </p>
 
-        <button id="check" class="btn">
-            Verificar minha localização
-        </button>
+  <button id="check" class="btn">Verificar minha localização</button>
 
-        <div id="status" class="status"></div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
 
-        <div class="footer">
-            Local autorizado: Av. Tucunaré, 720 – Tamboré, Barueri/SP.
-            <br><br>
-            O navegador solicitará permissão para utilizar sua localização.
-        </div>
+  <div class="footer">
+    Local autorizado: Av. Tucunaré, 720 – Tamboré, Barueri/SP.
+    <br><br>
+    O navegador solicitará permissão para utilizar sua localização.
+  </div>
 
-    </div>
+</div>
 
-    <script>
+<script>
+const TARGET = { lat: -23.4947049, lon: -46.8358179 };
+const RADIUS = 1000;
 
-        const TARGET = {
-            lat: -23.4947049,
-            lon: -46.8358179
-        };
+const FORM_URL =
+  "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=RaU9Qh6__km0Hi5-MbQLE8soOvqjAoVBnO9JLW0LHghUMVZTTFlFUjBWRktHMlAyOVcxRE1NTFNCQi4u";
 
-        const RADIUS = 1000;
+const btn = document.getElementById("check");
+const statusBox = document.getElementById("status");
 
-        const FORM_URL =
-            "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=RaU9Qh6__km0Hi5-MbQLE8soOvqjAoVBnO9JLW0LHghUMVZTTFlFUjBWRktHMlAyOVcxRE1NTFNCQi4u";
+function distanceMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const toRad = v => v * Math.PI / 180;
 
-        const btn = document.getElementById("check");
-        const statusBox = document.getElementById("status");
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
 
-        function distanceMeters(lat1, lon1, lat2, lon2) {
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
 
-            const R = 6371000;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
-            const toRad = value => value * Math.PI / 180;
+function showStatus(html, type) {
+  statusBox.className = "status show " + type;
+  statusBox.innerHTML = html;
+}
 
-            const dLat = toRad(lat2 - lat1);
-            const dLon = toRad(lon2 - lon1);
+function retry() {
+  btn.disabled = false;
+  btn.textContent = "Tentar novamente";
+}
 
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(toRad(lat1)) *
-                Math.cos(toRad(lat2)) *
-                Math.sin(dLon / 2) *
-                Math.sin(dLon / 2);
+btn.addEventListener("click", () => {
 
-            return R * 2 * Math.atan2(
-                Math.sqrt(a),
-                Math.sqrt(1 - a)
-            );
-        }
+  if (!navigator.geolocation) {
+    showStatus(
+      `<div class="title">Geolocalização não suportada.</div>
+       <p>Abra este link em um navegador atualizado do celular.</p>`,
+      "bad"
+    );
+    return;
+  }
 
-        function showStatus(html, type) {
+  btn.disabled = true;
+  btn.textContent = "Obtendo localização...";
 
-            statusBox.className = "status show " + type;
-            statusBox.innerHTML = html;
-        }
+  navigator.geolocation.getCurrentPosition(
 
-        function retry() {
+    position => {
+      const distance = distanceMeters(
+        position.coords.latitude,
+        position.coords.longitude,
+        TARGET.lat,
+        TARGET.lon
+      );
 
-            btn.disabled = false;
-            btn.textContent = "Tentar novamente";
-        }
+      if (distance <= RADIUS) {
+        showStatus(
+          `<div class="title">✓ Localização confirmada</div>
+           <div class="distance">${Math.round(distance)} m</div>
+           <p>Você está dentro da área permitida.</p>
+           <a class="link-btn" href="${FORM_URL}" target="_blank" rel="noopener">
+             Acessar formulário
+           </a>`,
+          "ok"
+        );
+        btn.style.display = "none";
+      } else {
+        showStatus(
+          `<div class="title">✕ Fora da área permitida</div>
+           <div class="distance">${Math.round(distance)} m</div>
+           <p>É necessário estar a até 1.000 metros do local autorizado
+              para acessar o formulário.</p>`,
+          "bad"
+        );
+        retry();
+      }
+    },
 
-        btn.addEventListener("click", () => {
+    error => {
+      let msg = "Não foi possível obter sua localização.";
 
-            if (!navigator.geolocation) {
+      if (error.code === 1) msg = "Permissão de localização negada. Ative a localização para continuar.";
+      if (error.code === 2) msg = "Localização indisponível. Tente novamente em um local com melhor sinal.";
+      if (error.code === 3) msg = "Tempo excedido ao obter a localização.";
 
-                showStatus(
-                    "<div class='title'>Geolocalização não suportada.</div>",
-                    "bad"
-                );
+      showStatus(`<div class="title">${msg}</div>`, "bad");
+      retry();
+    },
 
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = "Obtendo localização...";
-
-            navigator.geolocation.getCurrentPosition(
-
-                position => {
-
-                    const distance = distanceMeters(
-                        position.coords.latitude,
-                        position.coords.longitude,
-                        TARGET.lat,
-                        TARGET.lon
-                    );
-
-                    if (distance <= RADIUS) {
-
-                        showStatus(
-                            `
-                            <div class="title">
-                                ✅ Localização confirmada
-                            </div>
-
-                            <div class="distance">
-                                ${Math.round(distance)} m
-                            </div>
-
-                            <p>
-                                Você está dentro da área permitida.
-                            </p>
-
-                            <a
-                                class="link-btn"
-                                href="${FORM_URL}"
-                                target="_blank">
-                                Acessar formulário
-                            </a>
-                            `,
-                            "ok"
-                        );
-
-                        btn.style.display = "none";
-
-                    } else {
-
-                        showStatus(
-                            `
-                            <div class="title">
-                                ❌ Fora da área permitida
-                            </div>
-
-                            <div class="distance">
-                                ${Math.round(distance)} m
-                            </div>
-
-                            <p>
-                                É necessário estar a até
-                                1.000 metros do local autorizado.
-                            </p>
-                            `,
-                            "bad"
-                        );
-
-                        retry();
-                    }
-                },
-
-                error => {
-
-                    let msg = "Não foi possível obter sua localização.";
-
-                    if (error.code === 1) {
-                        msg = "Permissão de localização negada.";
-                    }
-
-                    if (error.code === 2) {
-                        msg = "Localização indisponível.";
-                    }
-
-                    if (error.code === 3) {
-                        msg = "Tempo excedido ao obter localização.";
-                    }
-
-                    showStatus(
-                        `<div class="title">${msg}</div>`,
-                        "bad"
-                    );
-
-                    retry();
-                },
-
-                {
-                    enableHighAccuracy: true,
-                    timeout: 15000,
-                    maximumAge: 0
-                }
-            );
-        });
-
-    </script>
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+  );
+});
+</script>
 
 </body>
 </html>
+
                 
